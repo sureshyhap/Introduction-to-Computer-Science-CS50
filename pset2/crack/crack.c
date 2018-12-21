@@ -1,0 +1,820 @@
+#include <stdio.h>
+#include <cs50.h>
+#include <crypt.h>
+#include <string.h>
+
+#define _GNU_SOURCE
+
+int main(int argc, string argv[])
+{
+  if (argc == 1 || argc > 2)
+    {
+      printf("Error, incorrect number of command line arguments.\n");;
+      return 1;
+    }
+
+  string hashed_pass = argv[1];
+  // First two characters of the hashed password is called the "salt"
+  char salt[] = { hashed_pass[0], hashed_pass[1] };
+
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+  // One character passwords (The comments will use 'U' for uppercase and 'L' for lowercase)
+  // Uppercase
+  for (char potential_pass[2] = { 'A', '\0' }; potential_pass[0] <= 'Z'; ++potential_pass[0])
+    {
+      // strcmp returns a 0 if the strings are the same. So in this case if the given hashed password matches the output of the
+      // hashing function with the tested password and salt
+      if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+        {
+	  printf("%s\n", potential_pass);
+	  return 0;
+        }
+    }
+
+  // Lowercase
+  for (char potential_pass[2] = { 'a', '\0' }; potential_pass[0] <= 'z'; ++potential_pass[0])
+    {
+      if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+        {
+	  printf("%s\n", potential_pass);
+	  return 0;
+        }
+    }
+
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+  // Two character passwords
+  for (char potential_pass[3] = { 'A', 'A', '\0' }; potential_pass[0] <= 'Z'; ++potential_pass[0])
+    {
+      // UU
+      for (potential_pass[1] = 'A'; potential_pass[1] <= 'Z'; ++potential_pass[1])
+        {
+	  if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+            {
+	      printf("%s\n", potential_pass);
+	      return 0;
+            }
+        }
+
+      // UL
+      for (potential_pass[1] = 'a'; potential_pass[1] <= 'z'; ++potential_pass[1])
+        {
+	  if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+            {
+	      printf("%s\n", potential_pass);
+	      return 0;
+            }
+        }
+    }
+
+  for (char potential_pass[3] = { 'a', 'A', '\0' }; potential_pass[0] <= 'z'; ++potential_pass[0])
+    {
+      // LU
+      for (potential_pass[1] = 'A'; potential_pass[1] <= 'Z'; ++potential_pass[1])
+        {
+	  if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+            {
+	      printf("%s\n", potential_pass);
+	      return 0;
+            }
+        }
+
+      // LL
+      for (potential_pass[1] = 'a'; potential_pass[1] <= 'z'; ++potential_pass[1])
+        {
+	  if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+            {
+	      printf("%s\n", potential_pass);
+	      return 0;
+            }
+        }
+    }
+
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+  // Three character passwords
+  for (char potential_pass[4] = { 'A', 'A', 'A', '\0' }; potential_pass[0] <= 'Z'; ++potential_pass[0])
+    {
+      for (potential_pass[1] = 'A'; potential_pass[1] <= 'Z'; ++potential_pass[1])
+        {
+	  // UUU
+	  for (potential_pass[2] = 'A'; potential_pass[2] <= 'Z'; ++potential_pass[2])
+            {
+	      if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                {
+		  printf("%s\n", potential_pass);
+		  return 0;
+                }
+            }
+
+	  // UUL
+	  for (potential_pass[2] = 'a'; potential_pass[2] <= 'z'; ++potential_pass[2])
+            {
+	      if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                {
+		  printf("%s\n", potential_pass);
+		  return 0;
+                }
+            }
+        }
+
+      for (potential_pass[1] = 'a'; potential_pass[1] <= 'z'; ++potential_pass[1])
+        {
+	  // ULU
+	  for (potential_pass[2] = 'A'; potential_pass[2] <= 'Z'; ++potential_pass[2])
+            {
+	      if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                {
+		  printf("%s\n", potential_pass);
+		  return 0;
+                }
+            }
+
+	  // ULL
+	  for (potential_pass[2] = 'a'; potential_pass[2] <= 'z'; ++potential_pass[2])
+            {
+	      if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                {
+		  printf("%s\n", potential_pass);
+		  return 0;
+                }
+            }
+        }
+    }
+
+  for (char potential_pass[4] = { 'a', 'A', 'A', '\0' }; potential_pass[0] <= 'z'; ++potential_pass[0])
+    {
+      for (potential_pass[1] = 'A'; potential_pass[1] <= 'Z'; ++potential_pass[1])
+        {
+	  // LUU
+	  for (potential_pass[2] = 'A'; potential_pass[2] <= 'Z'; ++potential_pass[2])
+            {
+	      if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                {
+		  printf("%s\n", potential_pass);
+		  return 0;
+                }
+            }
+
+	  // LUL
+	  for (potential_pass[2] = 'a'; potential_pass[2] <= 'z'; ++potential_pass[2])
+            {
+	      if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                {
+		  printf("%s\n", potential_pass);
+		  return 0;
+                }
+            }
+        }
+
+      for (potential_pass[1] = 'a'; potential_pass[1] <= 'z'; ++potential_pass[1])
+        {
+	  // LLU
+	  for (potential_pass[2] = 'A'; potential_pass[2] <= 'Z'; ++potential_pass[2])
+            {
+	      if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                {
+		  printf("%s\n", potential_pass);
+		  return 0;
+                }
+            }
+
+	  // LLL
+	  for (potential_pass[2] = 'a'; potential_pass[2] <= 'z'; ++potential_pass[2])
+            {
+	      if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                {
+		  printf("%s\n", potential_pass);
+		  return 0;
+                }
+            }
+        }
+    }
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+  // Four character passwords
+  for (char potential_pass[5] = { 'A', 'A', 'A', 'A', '\0' }; potential_pass[0] <= 'Z'; ++potential_pass[0])
+    {
+      for (potential_pass[1] = 'A'; potential_pass[1] <= 'Z'; ++potential_pass[1])
+        {
+	  for (potential_pass[2] = 'A'; potential_pass[2] <= 'Z'; ++potential_pass[2])
+            {
+	      // UUUU
+	      for (potential_pass[3] = 'A'; potential_pass[3] <= 'Z'; ++potential_pass[3])
+                {
+		  if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                    {
+		      printf("%s\n", potential_pass);
+		      return 0;
+                    }
+                }
+
+	      // UUUL
+	      for (potential_pass[3] = 'a'; potential_pass[3] <= 'z'; ++potential_pass[3])
+                {
+		  if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                    {
+		      printf("%s\n", potential_pass);
+		      return 0;
+                    }
+                }
+            }
+
+	  for (potential_pass[2] = 'a'; potential_pass[2] <= 'z'; ++potential_pass[2])
+            {
+	      // UULU
+	      for (potential_pass[3] = 'A'; potential_pass[3] <= 'Z'; ++potential_pass[3])
+                {
+		  if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                    {
+		      printf("%s\n", potential_pass);
+		      return 0;
+                    }
+                }
+
+	      // UULL
+	      for (potential_pass[3] = 'a'; potential_pass[3] <= 'z'; ++potential_pass[3])
+                {
+		  if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                    {
+		      printf("%s\n", potential_pass);
+		      return 0;
+                    }
+                }
+            }
+        }
+
+      for (potential_pass[1] = 'a'; potential_pass[1] <= 'z'; ++potential_pass[1])
+        {
+	  for (potential_pass[2] = 'A'; potential_pass[2] <= 'Z'; ++potential_pass[2])
+            {
+	      // ULUU
+	      for (potential_pass[3] = 'A'; potential_pass[3] <= 'Z'; ++potential_pass[3])
+                {
+		  if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                    {
+		      printf("%s\n", potential_pass);
+		      return 0;
+                    }
+                }
+
+	      // ULUL
+	      for (potential_pass[3] = 'a'; potential_pass[3] <= 'z'; ++potential_pass[3])
+                {
+		  if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                    {
+		      printf("%s\n", potential_pass);
+		      return 0;
+                    }
+                }
+            }
+
+	  for (potential_pass[2] = 'a'; potential_pass[2] <= 'z'; ++potential_pass[2])
+            {
+	      // ULLU
+	      for (potential_pass[3] = 'A'; potential_pass[3] <= 'Z'; ++potential_pass[3])
+                {
+		  if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                    {
+		      printf("%s\n", potential_pass);
+		      return 0;
+                    }
+                }
+
+	      // ULLL
+	      for (potential_pass[3] = 'a'; potential_pass[3] <= 'z'; ++potential_pass[3])
+                {
+		  if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                    {
+		      printf("%s\n", potential_pass);
+		      return 0;
+                    }
+                }
+            }
+        }
+    }
+
+  for (char potential_pass[5] = { 'a', 'A', 'A', 'A', '\0' }; potential_pass[0] <= 'z'; ++potential_pass[0])
+    {
+      for (potential_pass[1] = 'A'; potential_pass[1] <= 'Z'; ++potential_pass[1])
+        {
+	  for (potential_pass[2] = 'A'; potential_pass[2] <= 'Z'; ++potential_pass[2])
+            {
+	      // LUUU
+	      for (potential_pass[3] = 'A'; potential_pass[3] <= 'Z'; ++potential_pass[3])
+                {
+		  if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                    {
+		      printf("%s\n", potential_pass);
+		      return 0;
+                    }
+                }
+
+	      // LUUL
+	      for (potential_pass[3] = 'a'; potential_pass[3] <= 'z'; ++potential_pass[3])
+                {
+		  if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                    {
+		      printf("%s\n", potential_pass);
+		      return 0;
+                    }
+                }
+            }
+
+	  for (potential_pass[2] = 'a'; potential_pass[2] <= 'z'; ++potential_pass[2])
+            {
+	      // LULU
+	      for (potential_pass[3] = 'A'; potential_pass[3] <= 'Z'; ++potential_pass[3])
+                {
+		  if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                    {
+		      printf("%s\n", potential_pass);
+		      return 0;
+                    }
+                }
+
+	      // LULL
+	      for (potential_pass[3] = 'a'; potential_pass[3] <= 'z'; ++potential_pass[3])
+                {
+		  if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                    {
+		      printf("%s\n", potential_pass);
+		      return 0;
+                    }
+                }
+            }
+        }
+
+      for (potential_pass[1] = 'a'; potential_pass[1] <= 'z'; ++potential_pass[1])
+        {
+	  for (potential_pass[2] = 'A'; potential_pass[2] <= 'Z'; ++potential_pass[2])
+            {
+	      // LLUU
+	      for (potential_pass[3] = 'A'; potential_pass[3] <= 'Z'; ++potential_pass[3])
+                {
+		  if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                    {
+		      printf("%s\n", potential_pass);
+		      return 0;
+                    }
+                }
+
+	      // LLUL
+	      for (potential_pass[3] = 'a'; potential_pass[3] <= 'z'; ++potential_pass[3])
+                {
+		  if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                    {
+		      printf("%s\n", potential_pass);
+		      return 0;
+                    }
+                }
+            }
+
+	  for (potential_pass[2] = 'a'; potential_pass[2] <= 'z'; ++potential_pass[2])
+            {
+	      // LLLU
+	      for (potential_pass[3] = 'A'; potential_pass[3] <= 'Z'; ++potential_pass[3])
+                {
+		  if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                    {
+		      printf("%s\n", potential_pass);
+		      return 0;
+                    }
+                }
+
+	      // LLLL
+	      for (potential_pass[3] = 'a'; potential_pass[3] <= 'z'; ++potential_pass[3])
+                {
+		  if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                    {
+		      printf("%s\n", potential_pass);
+		      return 0;
+                    }
+                }
+            }
+        }
+    }
+
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+  // Five character passwords
+  for (char potential_pass[6] = { 'A', 'A', 'A', 'A', 'A', '\0' }; potential_pass[0] <= 'Z'; ++potential_pass[0])
+    {
+      for (potential_pass[1] = 'A'; potential_pass[1] <= 'Z'; ++potential_pass[1])
+        {
+	  for (potential_pass[2] = 'A'; potential_pass[2] <= 'Z'; ++potential_pass[2])
+            {
+	      for (potential_pass[3] = 'A'; potential_pass[3] <= 'Z'; ++potential_pass[3])
+                {
+		  // UUUUU
+		  for (potential_pass[4] = 'A'; potential_pass[4] <= 'Z'; ++potential_pass[4])
+                    {
+		      if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                        {
+			  printf("%s\n", potential_pass);
+			  return 0;
+                        }
+                    }
+
+		  // UUUUL
+		  for (potential_pass[4] = 'a'; potential_pass[4] <= 'z'; ++potential_pass[4])
+                    {
+		      if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                        {
+			  printf("%s\n", potential_pass);
+			  return 0;
+                        }
+                    }
+                }
+
+	      for (potential_pass[3] = 'a'; potential_pass[3] <= 'z'; ++potential_pass[3])
+                {
+		  // UUULU
+		  for (potential_pass[4] = 'A'; potential_pass[4] <= 'Z'; ++potential_pass[4])
+                    {
+		      if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                        {
+			  printf("%s\n", potential_pass);
+			  return 0;
+                        }
+                    }
+
+		  // UUULL
+		  for (potential_pass[4] = 'a'; potential_pass[4] <= 'z'; ++potential_pass[4])
+                    {
+		      if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                        {
+			  printf("%s\n", potential_pass);
+			  return 0;
+                        }
+                    }
+                }
+            }
+
+	  for (potential_pass[2] = 'a'; potential_pass[2] <= 'z'; ++potential_pass[2])
+            {
+	      for (potential_pass[3] = 'A'; potential_pass[3] <= 'Z'; ++potential_pass[3])
+                {
+		  // UULUU
+		  for (potential_pass[4] = 'A'; potential_pass[4] <= 'Z'; ++potential_pass[4])
+                    {
+		      if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                        {
+			  printf("%s\n", potential_pass);
+			  return 0;
+                        }
+                    }
+
+		  // UULUL
+		  for (potential_pass[4] = 'a'; potential_pass[4] <= 'z'; ++potential_pass[4])
+                    {
+		      if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                        {
+			  printf("%s\n", potential_pass);
+			  return 0;
+                        }
+                    }
+                }
+
+	      for (potential_pass[3] = 'a'; potential_pass[3] <= 'z'; ++potential_pass[3])
+                {
+		  // UULLU
+		  for (potential_pass[4] = 'A'; potential_pass[4] <= 'Z'; ++potential_pass[4])
+                    {
+		      if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                        {
+			  printf("%s\n", potential_pass);
+			  return 0;
+                        }
+                    }
+
+		  // UULLL
+		  for (potential_pass[4] = 'a'; potential_pass[4] <= 'z'; ++potential_pass[4])
+                    {
+		      if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                        {
+			  printf("%s\n", potential_pass);
+			  return 0;
+                        }
+                    }
+                }
+            }
+        }
+
+      for (potential_pass[1] = 'a'; potential_pass[1] <= 'z'; ++potential_pass[1])
+        {
+	  for (potential_pass[2] = 'A'; potential_pass[2] <= 'Z'; ++potential_pass[2])
+            {
+	      for (potential_pass[3] = 'A'; potential_pass[3] <= 'Z'; ++potential_pass[3])
+                {
+		  // ULUUU
+		  for (potential_pass[4] = 'A'; potential_pass[4] <= 'Z'; ++potential_pass[4])
+                    {
+		      if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                        {
+			  printf("%s\n", potential_pass);
+			  return 0;
+                        }
+                    }
+
+		  // ULUUL
+		  for (potential_pass[4] = 'a'; potential_pass[4] <= 'z'; ++potential_pass[4])
+		    OBOBOB                    {
+		      if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+			OBOBOB                        {
+			  printf("%s\n", potential_pass);
+			  return 0;
+                        }
+                    }
+                }
+
+	      for (potential_pass[3] = 'a'; potential_pass[3] <= 'z'; ++potential_pass[3])
+                {
+		  OAOAOA                    // ULULU
+		    OAOAOA                    for (potential_pass[4] = 'A'; potential_pass[4] <= 'Z'; ++potential_pass[4])
+                    {
+		      if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                        {
+			  printf("%s\n", potential_pass);
+			  return 0;
+                        }
+                    }
+
+		  OBOBOB                    // ULULL
+		      for (potential_pass[4] = 'a'; potential_pass[4] <= 'z'; ++potential_pass[4])
+			{
+			  if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+			    OBOBOB                        {
+			      printf("%s\n", potential_pass);
+			      return 0;
+			    }
+			}
+		  OAOAOA                }
+            }
+
+	  OAOAOA            for (potential_pass[2] = 'a'; potential_pass[2] <= 'z'; ++potential_pass[2])
+	      {
+                for (potential_pass[3] = 'A'; potential_pass[3] <= 'Z'; ++potential_pass[3])
+		  {
+                    // ULLUU
+                    for (potential_pass[4] = 'A'; potential_pass[4] <= 'Z'; ++potential_pass[4])
+		      {
+                        if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+			  {
+                            printf("%s\n", potential_pass);
+                            return 0;
+			  }
+		      }
+
+                    // ULLUL
+                    for (potential_pass[4] = 'a'; potential_pass[4] <= 'z'; ++potential_pass[4])
+		      {
+                        if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+			  {
+                            printf("%s\n", potential_pass);
+                            return 0;
+			  }
+		      }
+		  }
+
+                for (potential_pass[3] = 'a'; potential_pass[3] <= 'z'; ++potential_pass[3])
+		  {
+                    // ULLLU
+                    for (potential_pass[4] = 'A'; potential_pass[4] <= 'Z'; ++potential_pass[4])
+		      {
+                        if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+			  {
+                            printf("%s\n", potential_pass);
+                            return 0;
+			  }
+		      }
+
+                    // ULLLL
+                    for (potential_pass[4] = 'a'; potential_pass[4] <= 'z'; ++potential_pass[4])
+		      {
+                        if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+			  {
+                            printf("%s\n", potential_pass);
+                            return 0;
+			  }
+		      }
+		  }
+	      }
+        }
+    }
+
+  for (char potential_pass[6] = { 'a', 'A', 'A', 'A', 'A', '\0' }; potential_pass[0] <= 'z'; ++potential_pass[0])
+    {
+      for (potential_pass[1] = 'A'; potential_pass[1] <= 'Z'; ++potential_pass[1])
+        {
+	  for (potential_pass[2] = 'A'; potential_pass[2] <= 'Z'; ++potential_pass[2])
+            {
+	      for (potential_pass[3] = 'A'; potential_pass[3] <= 'Z'; ++potential_pass[3])
+                {
+		  // LUUUU
+		  for (potential_pass[4] = 'A'; potential_pass[4] <= 'Z'; ++potential_pass[4])
+                    {
+		      if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                        {
+			  printf("%s\n", potential_pass);
+			  return 0;
+                        }
+                    }
+
+		  // LUUUL
+		  for (potential_pass[4] = 'a'; potential_pass[4] <= 'z'; ++potential_pass[4])
+                    {
+		      if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                        {
+			  printf("%s\n", potential_pass);
+			  return 0;
+                        }
+                    }
+                }
+
+	      for (potential_pass[3] = 'a'; potential_pass[3] <= 'z'; ++potential_pass[3])
+                {
+		  // LUULU
+		  for (potential_pass[4] = 'A'; potential_pass[4] <= 'Z'; ++potential_pass[4])
+                    {
+		      if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                        {
+			  printf("%s\n", potential_pass);
+			  return 0;
+                        }
+                    }
+
+		  // LUULL
+		  for (potential_pass[4] = 'a'; potential_pass[4] <= 'z'; ++potential_pass[4])
+                    {
+		      if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                        {
+			  printf("%s\n", potential_pass);
+			  return 0;
+                        }
+                    }
+                }
+            }
+
+	  for (potential_pass[2] = 'a'; potential_pass[2] <= 'z'; ++potential_pass[2])
+            {
+	      for (potential_pass[3] = 'A'; potential_pass[3] <= 'Z'; ++potential_pass[3])
+                {
+		  // LULUU
+		  for (potential_pass[4] = 'A'; potential_pass[4] <= 'Z'; ++potential_pass[4])
+                    {
+		      if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                        {
+			  printf("%s\n", potential_pass);
+			  return 0;
+                        }
+                    }
+
+		  // LULUL
+		  for (potential_pass[4] = 'a'; potential_pass[4] <= 'z'; ++potential_pass[4])
+                    {
+		      if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                        {
+			  printf("%s\n", potential_pass);
+			  return 0;
+                        }
+                    }
+                }
+
+	      for (potential_pass[3] = 'a'; potential_pass[3] <= 'z'; ++potential_pass[3])
+                {
+		  // LULLU
+		  for (potential_pass[4] = 'A'; potential_pass[4] <= 'Z'; ++potential_pass[4])
+                    {
+		      if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                        {
+			  printf("%s\n", potential_pass);
+			  return 0;
+                        }
+                    }
+
+		  // LULLL
+		  for (potential_pass[4] = 'a'; potential_pass[4] <= 'z'; ++potential_pass[4])
+                    {
+		      if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                        {
+			  printf("%s\n", potential_pass);
+			  return 0;
+                        }
+                    }
+                }
+            }
+        }
+
+      for (potential_pass[1] = 'a'; potential_pass[1] <= 'z'; ++potential_pass[1])
+        {
+	  for (potential_pass[2] = 'A'; potential_pass[2] <= 'Z'; ++potential_pass[2])
+            {
+	      for (potential_pass[3] = 'A'; potential_pass[3] <= 'Z'; ++potential_pass[3])
+                {
+		  // LLUUU
+		  for (potential_pass[4] = 'A'; potential_pass[4] <= 'Z'; ++potential_pass[4])
+                    {
+		      if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                        {
+			  printf("%s\n", potential_pass);
+			  return 0;
+                        }
+                    }
+
+		  // LLUUL
+		  for (potential_pass[4] = 'a'; potential_pass[4] <= 'z'; ++potential_pass[4])
+                    {
+		      if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                        {
+			  printf("%s\n", potential_pass);
+			  return 0;
+                        }
+                    }
+                }
+
+	      for (potential_pass[3] = 'a'; potential_pass[3] <= 'z'; ++potential_pass[3])
+                {
+		  // LLULU
+		  for (potential_pass[4] = 'A'; potential_pass[4] <= 'Z'; ++potential_pass[4])
+                    {
+		      if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                        {
+			  printf("%s\n", potential_pass);
+			  return 0;
+                        }
+                    }
+
+		  // LLULL
+		  for (potential_pass[4] = 'a'; potential_pass[4] <= 'z'; ++potential_pass[4])
+                    {
+		      if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                        {
+			  printf("%s\n", potential_pass);
+			  return 0;
+                        }
+                    }
+                }
+            }
+
+	  for (potential_pass[2] = 'a'; potential_pass[2] <= 'z'; ++potential_pass[2])
+            {
+	      for (potential_pass[3] = 'A'; potential_pass[3] <= 'Z'; ++potential_pass[3])
+                {
+		  // LLLUU
+		  for (potential_pass[4] = 'A'; potential_pass[4] <= 'Z'; ++potential_pass[4])
+                    {
+		      if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                        {
+			  printf("%s\n", potential_pass);
+			  return 0;
+                        }
+                    }
+
+		  // LLLUL
+		  for (potential_pass[4] = 'a'; potential_pass[4] <= 'z'; ++potential_pass[4])
+                    {
+		      if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                        {
+			  printf("%s\n", potential_pass);
+			  return 0;
+                        }
+                    }
+                }
+
+	      for (potential_pass[3] = 'a'; potential_pass[3] <= 'z'; ++potential_pass[3])
+                {
+		  // LLLLU
+		  for (potential_pass[4] = 'A'; potential_pass[4] <= 'Z'; ++potential_pass[4])
+                    {
+		      if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                        {
+			  printf("%s\n", potential_pass);
+			  return 0;
+                        }
+                    }
+
+		  // LLLLL
+		  for (potential_pass[4] = 'a'; potential_pass[4] <= 'z'; ++potential_pass[4])
+                    {
+		      if (!strcmp(crypt(potential_pass, salt), hashed_pass))
+                        {
+			  printf("%s\n", potential_pass);
+			  return 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
