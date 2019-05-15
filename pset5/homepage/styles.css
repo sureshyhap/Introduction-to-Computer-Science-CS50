@@ -1,0 +1,49 @@
+body
+{
+    background-color: lightgreen;
+    color: purple;
+    font-family: verdana;
+    font-size: 150%;
+    text-align: left;
+}
+
+.Return
+{
+    background-color: gray;
+    color: blue;
+    font-family: times;
+    font-size: 80%;
+    text-align: center;
+}
+
+#Mario
+{
+    position: absolute;
+    left: 5%;
+    top: 80%;
+    width: 25%;
+    height: 50%;
+}
+
+#Physics
+{
+    position: absolute;
+    left: 32%;
+    top: 80%;
+    width: 35%;
+    height: 50%;
+}
+
+#Music
+{
+    position: absolute;
+    right: 2%;
+    top: 80%;
+    width: 30%;
+    height: 50%;
+}
+
+#welcome_text
+{
+    text-align: center;
+}
