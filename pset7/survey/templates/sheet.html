@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+    <table class = "table table-dark">
+        <thead>
+            <tr>
+                <th scope = "col">Name</th>
+                <th scope = "col">House</th>
+                <th scope = "col">Position</th>
+            </tr>
+        </thead>
+    {% for player in players %}
+        <tbody>
+            <tr>
+                <td>{{ player[0] }}</td>
+                <td>{{ player[1] }}</td>
+                <td>{{ player[2] }}</td>
+            </tr>
+        </tbody>
+    {% endfor %}
+    </table>
+
+{% endblock %}

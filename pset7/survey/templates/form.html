@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+    <!-- http://getbootstrap.com/docs/4.1/content/typography/ -->
+    <h1 class="mb-3">Form</h1>
+
+    <!-- http://getbootstrap.com/docs/4.1/components/forms/ -->
+    <form action="/form" method="post">
+
+        <input id="name_field" type="text" name="name" placeholder="Name">
+        <br><br>
+        <select name="house">
+            <option disabled selected value ="">House</option>
+            <option value="Gryffindor">Gryffindor</option>
+            <option value="Hufflepuff">Hufflepuff</option>
+            <option value="Ravenclaw">Ravenclaw</option>
+            <option value="Slytherin">Slytherin</option>
+        </select>
+        <br><br>
+        <div class="custom-control custom-radio">
+            <input type="radio" id="customRadio1" name="player_position" value="Beater" class="custom-control-input">
+            <label class="custom-control-label" for="customRadio1">Beater</label>
+        </div>
+        <div class="custom-control custom-radio">
+            <input type="radio" id="customRadio2" name="player_position" value="Chaser" class="custom-control-input">
+            <label class="custom-control-label" for="customRadio2">Chaser</label>
+        </div>
+        <div class="custom-control custom-radio">
+            <input type="radio" id="customRadio3" name="player_position" value="Keeper" class="custom-control-input">
+            <label class="custom-control-label" for="customRadio3">Keeper</label>
+        </div>
+        <div class="custom-control custom-radio">
+            <input type="radio" id="customRadio4" name="player_position" value="Seeker" class="custom-control-input">
+            <label class="custom-control-label" for="customRadio4">Seeker</label>
+        </div>
+        <br>
+
+        <!-- http://getbootstrap.com/docs/4.1/components/buttons/ -->
+        <button class="btn btn-primary" type="submit">Submit</button>
+
+    </form>
+
+    <script>
+        document.querySelector('form').onsubmit = function() {
+            if (!document.querySelector('#name_field').value) {
+                alert('You must provide your name!');
+                return false;
+            }
+            else if (!document.querySelector('select').value) {
+                alert('You must provide your house!');
+                return false;
+            }
+            else if (!document.getElementById('customRadio1').checked
+                  && !document.getElementById('customRadio2').checked
+                  && !document.getElementById('customRadio3').checked
+                  && !document.getElementById('customRadio4').checked) {
+                alert('You must choose a position!');
+                return false;
+            }
+            return true;
+        };
+
+    </script>
+
+{% endblock %}
