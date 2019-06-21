@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quoted
+{% endblock %}
+
+{% block main %}
+    <table class="table table-dark">
+        <tr>
+            <th scope="col">Company</th>
+            <th scope="col">Price</th>
+            <th scope="col">Symbol</th>
+        </tr>
+        <tr>
+            <td>{{ quote["name"] }}</td>
+            <td>{{ quote["price"] }}</td>
+            <td>{{ quote["symbol"] }}</td>
+        </tr>
+    </table>
+{% endblock %}
